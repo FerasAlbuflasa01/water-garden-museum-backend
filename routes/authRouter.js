@@ -1,13 +1,8 @@
 const router = require('express').Router()
 const controller = require('../Controllers/authConrtollers')
-
+const middleware = require('../middleware')
 router.post('/', controller.Login)
 
-// router.get(
-//   '/session',
-//   middleware.stripToken,
-//   middleware.verifyToken,
-//   controller.CheckSession
-// )
+router.get('/session', middleware.verifyToken, controller.checkSession)
 
 module.exports = router
