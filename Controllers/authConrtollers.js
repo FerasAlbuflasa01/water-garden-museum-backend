@@ -1,23 +1,19 @@
-const { Admin } = require('../modules/Admin')
-const Login = async (req, res) => {
+const Admin = require('../models/Admin.js')
+const bcrypt = require('bcrypt')
+exports.Login = async (req, res) => {
   try {
-    // Extracts the necessary fields from the request body
     const { username, password } = req.body
-    console.log(req.body)
-    // Finds a user by a particular field (in this case, email)
-    const user = await Admin.findOne(req.body.username )
-    // Checks if the password matches the stored digest
-    let matched = await bcrypt.compare(password,user.password)
 
-    // If they match, constructs a payload object of values we want on the front end
+    const admin = await Admin.findOne({ username })
+
+    let matched = await bcrypt.compare(password, admin.password)
+
     if (matched) {
       let payload = {
-        id: user.id,
-        email: user.email
+        id: admin.id
       }
-      // Creates our JWT and packages it with our payload to send as a response
 
-      return res.status(200).send({ user: payload })
+      return res.status(200).send({ admin: payload })
     }
     res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
   } catch (error) {
@@ -26,9 +22,4 @@ const Login = async (req, res) => {
       .status(401)
       .send({ status: 'Error', msg: 'An error has occurred logging in!' })
   }
-}
-
-module.exports = {
-  Login
-  // CheckSession
 }

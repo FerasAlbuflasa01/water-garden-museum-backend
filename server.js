@@ -7,9 +7,9 @@ const bcrypt = require('bcrypt')
 const app = express()
 const methodOverride = require('method-override')
 const authRouter = require('./routes/authRouter')
-const Admin = require('./modules/Admin')
+const Admin = require('./models/Admin')
 
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors())
 app.use(methodOverride('_method'))
@@ -32,7 +32,7 @@ firstAdmin()
 
 //////////////////////////////////////////////////////////////////////////////
 
-app.get('/',async (req, res) => {
+app.get('/', async (req, res) => {
   res.send('connected')
 })
 
