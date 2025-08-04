@@ -36,7 +36,7 @@ app.get('/', async (req, res) => {
   res.send('connected')
 })
 
-app.use('/login', authRouter)
+app.use('/auth', authRouter)
 app.listen(3001, () => {
   console.log('server is running on port 3001')
 })
