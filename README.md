@@ -43,11 +43,9 @@ The project is currently under development and will be deployed soon.
 
 - All project screenshots and visual references can be viewed [here](https://drive.google.com/drive/folders/1Eo5tPdrskJhHrveweG-Kt94Vrfn8RMvJ?usp=drive_link)
 
-- ERD ![ERD]()
-
 - CHD ![Image 1](https://i.imgur.com/mrBBTXq.png)
 
-- - CHD ![Image 2](https://i.imgur.com/guRo0S0.png)
+- ERD ![Image 2](https://i.imgur.com/guRo0S0.png)
 
 ---
 
