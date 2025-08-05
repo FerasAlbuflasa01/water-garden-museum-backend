@@ -9,19 +9,19 @@ exports.verifyToken = (req, res, next) => {
 
   //2. check if token exsits token
 
-  if (token && token !== null) {
-    console.log(token + " is here")
+  if (token) {
+    console.log(token + ' is here')
     //save token in the locals
     res.locals.token = token
     //verfiy token
     let payload = jwt.verify(token, APP_SECRET)
     if (payload) {
-      console.log("payload"+ " is here too")
+      console.log('payload' + ' is here too')
       //save payload in locals
       res.locals.payload = payload
       return next()
     }
   }
-  console.log("on thing is here")
+  console.log('on thing is here')
   res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
 }
