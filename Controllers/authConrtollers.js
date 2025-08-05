@@ -7,7 +7,6 @@ const APP_SECRET = process.env.APP_SECRET
 exports.Login = async (req, res) => {
   try {
     const { username, password } = req.body
-
     const admin = await Admin.findOne({ username })
 
     let matched = await bcrypt.compare(password, admin.password)

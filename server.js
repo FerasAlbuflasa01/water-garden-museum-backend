@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt')
 const app = express()
 const methodOverride = require('method-override')
 const authRouter = require('./routes/authRouter')
+const gameRouter = require('./routes/GameRouter')
 const Admin = require('./models/Admin')
 
 app.use(express.urlencoded({ extended: false }))
@@ -37,6 +38,8 @@ app.get('/', async (req, res) => {
 })
 
 app.use('/auth', authRouter)
+app.use('/games', gameRouter)
+
 app.listen(3001, () => {
   console.log('server is running on port 3001')
 })
