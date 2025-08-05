@@ -15,3 +15,15 @@ exports.newGamess = async (req, res) => {
     return res.json({ message: 'Game created successfully' })
   }
 }
+
+exports.showGames = async (req,res) => {
+  const games = await Game.find()
+  return res.json(games)
+}
+
+exports.showGamesDetails = async (req,res) => {
+  const gameId = req.params.gameId
+  const games = await Game.findById(gameId)
+  return res.json(games)
+}
+
