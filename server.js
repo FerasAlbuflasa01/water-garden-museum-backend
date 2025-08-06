@@ -15,8 +15,6 @@ app.use(express.json())
 app.use(cors())
 app.use(methodOverride('_method'))
 
-//////////////////////////////////////////////////////////////////////////////
-
 const firstAdmin = async () => {
   const listOfAdmin = await Admin.findOne({ username: 'admin' })
   if (!listOfAdmin) {
@@ -30,8 +28,6 @@ const firstAdmin = async () => {
   }
 }
 firstAdmin()
-
-//////////////////////////////////////////////////////////////////////////////
 
 app.get('/', async (req, res) => {
   res.send('connected')

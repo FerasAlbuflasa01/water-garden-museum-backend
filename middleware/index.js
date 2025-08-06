@@ -5,9 +5,7 @@ const APP_SECRET = process.env.APP_SECRET
 exports.verifyToken = (req, res, next) => {
   //1.get token from header
   let token = req.headers['authorization'].split(' ')[1]
-
   //2. check if token exsits token
-
   if (token) {
     //save token in the locals
     res.locals.token = token

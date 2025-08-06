@@ -16,8 +16,6 @@ exports.Login = async (req, res) => {
         id: admin.id,
         role: 'admin'
       }
-      console.log(payload)
-      //token creation
       let token = jwt.sign(payload, APP_SECRET)
       return res.status(200).send({ admin: payload, token: token })
     }
