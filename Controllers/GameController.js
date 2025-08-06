@@ -1,3 +1,4 @@
+const Admin = require('../models/Admin')
 const Game = require('../models/Games')
 const jwt = require('jsonwebtoken')
 const APP_SECRET = process.env.APP_SECRET
@@ -36,10 +37,11 @@ exports.deleteGame = async (req, res) => {
   let token = req.headers['authorization'].split(' ')[1]
   let payload = jwt.verify(token, APP_SECRET)
   console.log(payload)
-  let admin = await Game.findById(gameId).populate('Admin')
-  if (admin._id === payload.id) {
-    console.log('yes')
+  let adminCreated = await Game.findById(gameId)
+
+  if (adminCreated.created.equals(payload.id)) {
+    await Game.findByIdAndDelete(gameId)
   }
-  await Game.findByIdAndDelete(gameId)
+
   return res.json({ message: 'Game deleted successfully' })
 }
