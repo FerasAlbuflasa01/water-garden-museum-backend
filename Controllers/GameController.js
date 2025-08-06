@@ -1,7 +1,13 @@
+const Admin = require('../models/Admin')
 const Game = require('../models/Games')
-
+const jwt = require('jsonwebtoken')
+const APP_SECRET = process.env.APP_SECRET
 exports.newGamess = async (req, res) => {
-  const { name, discription, price, img } = req.body
+  let token = req.headers['authorization'].split(' ')[1]
+  let payload = jwt.verify(token, APP_SECRET)
+  console.log(payload)
+  req.body.created = payload.id
+  const { name } = req.body
   const newGame = await Game.findOne({ name })
   if (newGame) {
     if (newGame.name !== name) {
@@ -16,14 +22,26 @@ exports.newGamess = async (req, res) => {
   }
 }
 
-exports.showGames = async (req,res) => {
+exports.showGames = async (req, res) => {
   const games = await Game.find()
   return res.json(games)
 }
 
-exports.showGamesDetails = async (req,res) => {
+exports.showGamesDetails = async (req, res) => {
   const gameId = req.params.gameId
   const games = await Game.findById(gameId)
   return res.json(games)
 }
+exports.deleteGame = async (req, res) => {
+  const gameId = req.params.gameId
+  let token = req.headers['authorization'].split(' ')[1]
+  let payload = jwt.verify(token, APP_SECRET)
+  console.log(payload)
+  let adminCreated = await Game.findById(gameId)
 
+  if (adminCreated.created.equals(payload.id)) {
+    await Game.findByIdAndDelete(gameId)
+  }
+
+  return res.json({ message: 'Game deleted successfully' })
+}
